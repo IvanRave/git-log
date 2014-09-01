@@ -1,0 +1,22 @@
+{
+  "name": "git-log",
+  "version": "0.1.0",
+  "description": "Create a log from GIT commits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IvanRave/git-log.git"
+  },
+  "author": "IvanRave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IvanRave/git-log/issues"
+  },
+  "homepage": "https://github.com/IvanRave/git-log",
+  "dependencies": {
+    "dateformat": "^1.0.8-1.2.3"
+  }
+}
