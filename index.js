@@ -58,6 +58,9 @@ var handleRes = function(logFilePath, done, err, result) {
   fs.writeFile(logFilePath, listOfTabBody.join('\n'), done);
 };
 
+/**
+ * Create log
+ * /
 exports.createLog = function(tmpFilePath, logFilePath, done) {
   fs.readFile(tmpFilePath, handleRes.bind(null, logFilePath, done));
 };
