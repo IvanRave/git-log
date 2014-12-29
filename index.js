@@ -60,7 +60,7 @@ var handleRes = function(logFilePath, done, err, result) {
 
 /**
  * Create log
- * /
+ */
 exports.createLog = function(tmpFilePath, logFilePath, done) {
   fs.readFile(tmpFilePath, handleRes.bind(null, logFilePath, done));
 };
