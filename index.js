@@ -1,13 +1,30 @@
+// See README
+
 var dateFormat = require('dateformat');
 var fs = require('fs');
 
 var separator = '==--==';
+
+/**
+ * {@link https://git-scm.com/docs/git-log}
+ * @returns {array} Array of arguments for a GIT command (terminal)
+ */
 exports.generateArgs = function(afterDate, beforeDate, filePath) {
   // format:"%B%n"
   // format:%s#%b
+  // %s: subject
+  // %b: body
   var logFormat = '%s=%b' + separator;
 
-  var gitArgs = ['--pretty=format:' + logFormat, '--date-order', '--no-merges', '> ' + filePath];
+  var gitArgs = [
+    '--pretty=format:' + logFormat,
+    // Show no parents before all of its children are shown, but otherwise show commits in the commit timestamp order.
+    '--date-order',
+    // Do not print commits with more than one parent.    
+    '--no-merges',
+    // Save a result to filePath
+    '> ' + filePath
+  ];
 
   //  var afterDate = new Date(Date.now() - (1000 * 60 * 60 * 24));
   //  var beforeDate = new Date();
@@ -19,6 +36,9 @@ exports.generateArgs = function(afterDate, beforeDate, filePath) {
   return gitArgs;
 };
 
+/**
+* @returns {string|null} Parsed commit string
+*/
 var handleEachCommit = function(commitItem) {
 
   var maxTimeLength = 'time: 12h:34'.length;
@@ -45,9 +65,13 @@ var handleEachCommit = function(commitItem) {
   }
 };
 
+/**
+* Write a result to a log file
+*/
 var handleRes = function(logFilePath, done, err, result) {
   if (err) {
-    return done(err);
+    done(err);
+    return;
   }
 
 
@@ -59,7 +83,7 @@ var handleRes = function(logFilePath, done, err, result) {
 };
 
 /**
- * Create log
+ * Create a log file from a temporary file
  */
 exports.createLog = function(tmpFilePath, logFilePath, done) {
   fs.readFile(tmpFilePath, handleRes.bind(null, logFilePath, done));
