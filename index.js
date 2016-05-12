@@ -14,16 +14,14 @@ exports.generateArgs = function(afterDate, beforeDate, filePath) {
   // format:%s#%b
   // %s: subject
   // %b: body
-  var logFormat = '%s=%b' + separator;
+  var logFormat = '%s\t%b' + separator;
 
   var gitArgs = [
-    '--pretty=format:' + logFormat,
+    '--pretty="format:' + logFormat + '"',
     // Show no parents before all of its children are shown, but otherwise show commits in the commit timestamp order.
     '--date-order',
     // Do not print commits with more than one parent.    
-    '--no-merges',
-    // Save a result to filePath
-    '> ' + filePath
+    '--no-merges'
   ];
 
   //  var afterDate = new Date(Date.now() - (1000 * 60 * 60 * 24));
@@ -32,6 +30,9 @@ exports.generateArgs = function(afterDate, beforeDate, filePath) {
   gitArgs.push('--after="' + dateFormat(afterDate, "isoDateTime") + '"');
 
   gitArgs.push('--before="' + dateFormat(beforeDate, "isoDateTime") + '"');
+  
+  // Save a result to filePath
+  gitArgs.push('> ' + filePath);
 
   return gitArgs;
 };

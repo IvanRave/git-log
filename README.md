@@ -3,6 +3,13 @@ GIT log
 
 Creates a log from git commits, using https://git-scm.com/docs/git-log
 
+Output: one-line strings, separated by tabs (suitable for spreadsheets)
+
+- subject (some subject)
+- body (some body)
+- time (0:15)
+
+
 Using
 ---
 
