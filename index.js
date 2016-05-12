@@ -14,10 +14,13 @@ exports.generateArgs = function(afterDate, beforeDate, filePath) {
   // format:%s#%b
   // %s: subject
   // %b: body
-  var logFormat = '%s\t%b' + separator;
+  // %cd: committer date, using --date format
+  var logFormat = '%cd\t%s\t%b' + separator;
 
   var gitArgs = [
     '--pretty="format:' + logFormat + '"',
+    // YYYY-MM-DD
+    '--date=short',
     // Show no parents before all of its children are shown, but otherwise show commits in the commit timestamp order.
     '--date-order',
     // Do not print commits with more than one parent.    
