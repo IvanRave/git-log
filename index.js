@@ -56,8 +56,8 @@ var handleEachCommit = function(commitItem) {
     mainStr = commitItem;
   }
 
-  // Remove enters and trim the string
-  mainStr = mainStr.replace(/\n/g, ' ').trim();
+  // Do not trim() this string - it removes necessary tabs
+  mainStr = mainStr.replace(/\n/g, ' ');
 
   if (mainStr) {
     return mainStr + '\t' + (timeStr || 0);
