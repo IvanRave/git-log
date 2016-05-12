@@ -63,7 +63,7 @@ var handleEachCommit = function(commitItem) {
   mainStr = mainStr.replace(/\n/g, ' ');
 
   if (mainStr) {
-    return mainStr + '\t' + (timeStr || 0);
+    return (mainStr + '\t' + (timeStr || 0)).trim();
   } else {
     return null;
   }
